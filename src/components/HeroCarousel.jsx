@@ -77,7 +77,16 @@ const SolarLandingPage = () => {
     if (!validate()) return;
     setLoading(true);
     try {
-      await api.post("/enquiry", formData);
+      // await api.post("/enquiry", formData);
+
+      const res = await fetch("https://script.google.com/macros/s/AKfycbw_NZHXRCnxe9SYtiyCSj6_g7Yoten3saRCkGvfnVAqm1P_YIgsTXAyc4OreA1Q49EF/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+      console.log(res)
+
       alert("Success! Our expert will call you soon.");
       setFormData({ name: "", email: "", mobile_number: "", city: "", pin_code: "", monthly_electricity_bill: "" });
     } catch (err) {
